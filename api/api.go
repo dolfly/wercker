@@ -241,10 +241,16 @@ func (c *APIClient) GetStepVersion(owner, name, version string) (*APIStepVersion
 		return nil, err
 	}
 
+	// the next two line remove temporarily the auth token
+	// as this call doesn't need to be authenticated.
+	token := c.options.AuthToken
+	c.options.AuthToken = ""
+
 	res, err := c.Get(url)
 	if err != nil {
 		return nil, err
 	}
+	c.options.AuthToken = token
 
 	if res.StatusCode != 200 {
 		return nil, c.parseError(res)
