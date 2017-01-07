@@ -5,7 +5,7 @@ build:
         TEST_PATH: $TEST_SERVICE_VOL_PATH
       id: alpine
       volumes: $TEST_SERVICE_VOL_PATH
-      cmd: /bin/sh -c 'while true; do ls $TEST_PATH && sleep 1|| exit 1; done'
+      cmd: /bin/sh -c "while true; do ls $TEST_PATH || exit 1; sleep 1; done"
   box:
     id: alpine
     cmd: /bin/sh
